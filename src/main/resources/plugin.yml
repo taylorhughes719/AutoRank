@@ -1,0 +1,28 @@
+name: AutoRank
+version: ${project.version}
+main: me.taylorhughes.autorank.AutoRank
+prefix: AutoRank
+softdepend: [Vault, PlaceholderAPI]
+author: taylorhughes719
+description: Gives players ranks and rewards based on playtime.
+commands:
+  autorank:
+    description: The main command for AutoRank.
+
+permissions:
+  autorank.*:
+    description: Gives access to all commands and features of AutoRank.
+    children:
+      autorank.admin: true
+  autorank.playtime.others:
+    description: Allows access to check another player's playtime.
+    default: false
+  autorank.playtime:
+    description: Allows access to check your current playtime.
+    default: false
+  autorank.ranks:
+    description: Allows access to open the ranks menu.
+    default: false
+  autorank.help:
+    description: Allows access to the help command for AutoRank.
+    default: false

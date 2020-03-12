@@ -1,0 +1,64 @@
+# AutoRank custom plugin
+# by taylorhughes719
+
+On-Rankup:
+  Message-Player:
+    Enabled: true
+    Message: ''
+  Send-Title:
+    Enabled: true
+    Title: '&fRankUp! You are now:'
+    Subtitle: '%rank%'
+    Fade-In: 1
+    Stay: 3
+    Fade-Out: 1
+  Broadcast:
+    Enabled: true
+    Message: '&d%displayname% &djust ranked up to %rank% by playing for a total of %time%!'
+
+
+Menus:
+  # No need to adjust size. It is automatically adjusted based on amount of rewards
+  Ranks-Menu:
+    Title: '&b&lRanks'
+
+
+
+# Rewards
+#
+# Playtime-Required:
+# 1h = 1 hour   1d = 1 day   1m = 1 minute
+Rewards:
+  member:
+    Playtime-Required: 1h
+    Rank-Rewarded: member
+    Display-Name: 'Member'
+    Display-Item:
+      Material: GRASS_BLOCK
+      Amount: 1
+      Name: '&fMember'
+      Lore:
+        - '&7Access to &8/kit member'
+        - ''
+        - '&7Playtime Required:'
+        - ' - &b1 Hour'
+    Commands:
+      - '/pex user %player% group add member'
+      - '/message %player% &6You have just been promoted to &fMember&6!'
+  veteran:
+    Playertime-Required: 1d
+    Rank-Rewarded: veteran
+    Display-Name: 'Veteran'
+    Display-Item:
+      Material: STONE
+      Amount: 1
+      Name: '&7Veteran'
+      Lore:
+        - '&7Access to &8/kit veteran'
+        - '&71 Additional home'
+        - ''
+        - '&7Playtime Required:'
+        - ' - &b1 Day'
+    Commands:
+      - '/pex user %player% group add veteran'
+      - '/message %player% &6You have just been promoted to &7Veteran&6!'

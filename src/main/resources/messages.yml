@@ -1,0 +1,8 @@
+# Messages
+Commands:
+  Check-Playtime: '&6Time played: %time%'
+  Check-Playtime-Other: '&6%player% &6has played: %time%'
+
+No-Permission:
+  Commmand: '&cYou do not have permission to use this command!'
+

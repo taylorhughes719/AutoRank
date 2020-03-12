@@ -1,0 +1,15 @@
+# Rewards
+#
+# Playtime-Required:
+# 1h = 1 hour   1d = 1 day   1m = 1 minute
+
+rank-1:
+  Playtime-Required: 1h
+  Rank-Rewarded: a_rank
+  Broadcast-Message:
+    Enabled: true
+    Message: '&d%displayname% &djust ranked up to %rank% by playing for a total of %time%!'
+  Title:
+    Enabled: true
+
+
