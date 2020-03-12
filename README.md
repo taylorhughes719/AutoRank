@@ -1,0 +1,2 @@
+# AutoRank
+Custom autorank plugin
