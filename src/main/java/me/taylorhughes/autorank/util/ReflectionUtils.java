@@ -53,7 +53,9 @@ public class ReflectionUtils {
         MethodHandle getHandle = null;
         MethodHandle connection = null;
         try {
-            connection = lookup.findGetter(entityPlayer, "playerConnection", playerConnection);
+            if (playerConnection != null && entityPlayer != null) {
+                connection = lookup.findGetter(entityPlayer, "playerConnection", playerConnection);
+            }
             getHandle = lookup.findVirtual(craftPlayer, "getHandle", MethodType.methodType(entityPlayer));
             sendPacket = lookup.findVirtual(playerConnection, "sendPacket", MethodType.methodType(void.class, getNMSClass("Packet")));
         } catch (NoSuchMethodException | NoSuchFieldException | IllegalAccessException ex) {

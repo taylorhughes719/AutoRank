@@ -8,10 +8,13 @@ description: Gives players ranks and rewards based on playtime.
 commands:
   autorank:
     description: The main command for AutoRank.
+  playtime:
+    description: Check your (or another player's) playtime.
 
 permissions:
   autorank.*:
     description: Gives access to all commands and features of AutoRank.
+    default: op
     children:
       autorank.admin: true
   autorank.playtime.others:
@@ -25,4 +28,19 @@ permissions:
     default: false
   autorank.help:
     description: Allows access to the help command for AutoRank.
+    default: false
+  autorank.help.admin:
+    description: Allows access to the admin help page for AutoRank.
+    default: false
+  autorank.modify.*:
+    description: Allows access to modify both player stats and rank.
+    default: false
+    children:
+      autorank.modify.stats: true
+      autorank.modify.ranks: true
+  autorank.modify.stats:
+    description: Allows access to modify player's stats.
+    default: false
+  autorank.modify.ranks:
+    description: Allows access to modify a player's rank.
     default: false

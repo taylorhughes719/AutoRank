@@ -1,6 +1,7 @@
 package me.taylorhughes.autorank.data;
 
 import me.taylorhughes.autorank.AutoRank;
+import me.taylorhughes.autorank.util.Manager;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -11,14 +12,20 @@ import java.util.UUID;
 /**
  * @author Taylor Hughes
  */
-public class DataManager {
+public class DataManager extends Manager {
 
-    private AutoRank plugin;
     private Map<Player, PlayerData> data;
 
     public DataManager(AutoRank plugin) {
-        this.plugin = plugin;
+        super(plugin);
         this.data = new HashMap<>();
+    }
+
+    public void shutdown() {
+        if (this.data != null) {
+            this.data.clear();
+            this.data = null;
+        }
     }
 
     public PlayerData getPlayerData(Player player) {
@@ -49,11 +56,11 @@ public class DataManager {
         return data;
     }
 
-    public void loadPlayerData(UUID playerID) {
+    public void loadPlayerData(UUID playerID) {}
 
+    public Map<Player, PlayerData> getData() {
+        return data;
     }
 
-    public AutoRank getPlugin() {
-        return plugin;
-    }
+
 }

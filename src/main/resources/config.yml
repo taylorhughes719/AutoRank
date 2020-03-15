@@ -27,10 +27,10 @@ Menus:
 # Rewards
 #
 # Playtime-Required:
-# 1h = 1 hour   1d = 1 day   1m = 1 minute
+# 1 h = 1 hour   1 d = 1 day   1 m = 1 minute
 Rewards:
   member:
-    Playtime-Required: 1h
+    Playtime-Required: 1 h
     Rank-Rewarded: member
     Display-Name: 'Member'
     Display-Item:
@@ -43,10 +43,10 @@ Rewards:
         - '&7Playtime Required:'
         - ' - &b1 Hour'
     Commands:
-      - '/pex user %player% group add member'
-      - '/message %player% &6You have just been promoted to &fMember&6!'
+      - 'pex user %player% group add member'
+      - 'message %player% &6You have just been promoted to &fMember&6!'
   veteran:
-    Playertime-Required: 1d
+    Playtime-Required: 1 d
     Rank-Rewarded: veteran
     Display-Name: 'Veteran'
     Display-Item:
@@ -60,5 +60,41 @@ Rewards:
         - '&7Playtime Required:'
         - ' - &b1 Day'
     Commands:
-      - '/pex user %player% group add veteran'
-      - '/message %player% &6You have just been promoted to &7Veteran&6!'
+      - 'pex user %player% group add veteran'
+      - 'message %player% &6You have just been promoted to &7Veteran&6!'
+  rank-3:
+    Playtime-Required: 1 d
+    Rank-Rewarded: rank-3
+    Display-Name: 'Rank-3'
+    Display-Item:
+      Material: STONE
+      Amount: 1
+      Name: '&3Rank #3'
+      Lore:
+        - '&7Access to &3/kit rank-3'
+        - '&71 Additional home'
+        - '&7Ability to use /craft'
+        - ''
+        - '&7Playtime Required:'
+        - ' - &b36 hours'
+    Commands:
+      - 'pex user %player% group add rank-3'
+      - 'message %player% &6You have just been promoted to &3Rank #3&6!'
+  iron:
+    Playtime-Required: 2 d
+    Rank-Rewarded: iron
+    Display-Name: 'Iron'
+    Display-Item:
+      Material: IRON_INGOT
+      Amount: 1
+      Name: '&fIron'
+      Lore:
+        - '&7Access to &8/kit &firon'
+        - '&71 Additional home'
+        - '&7Ability to create disposal signs '
+        - ''
+        - '&7Playtime Required:'
+        - ' - &b1 Day'
+    Commands:
+      - 'pex user %player% group add iron'
+      - 'message %player% &6You have just been promoted to &fIron&6!'

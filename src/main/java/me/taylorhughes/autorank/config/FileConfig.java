@@ -93,7 +93,7 @@ public class FileConfig {
         return Text.colorize(this.config.getString(key, def));
     }
 
-    public List<String> getList(String key) {
+    public List<String> getStringList(String key) {
         return Text.colorize(this.config.getStringList(key));
     }
 

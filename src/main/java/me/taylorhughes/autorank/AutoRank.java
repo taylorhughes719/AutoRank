@@ -1,8 +1,12 @@
 package me.taylorhughes.autorank;
 
+import me.taylorhughes.autorank.cmd.AutoRankCmd;
+import me.taylorhughes.autorank.cmd.CheckPlaytimeCmd;
 import me.taylorhughes.autorank.config.FileConfig;
 import me.taylorhughes.autorank.data.DataManager;
 
+import me.taylorhughes.autorank.event.InventoryListener;
+import me.taylorhughes.autorank.event.PlayerListener;
 import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
@@ -11,6 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.Duration;
+import java.util.Objects;
 
 
 /**
@@ -24,6 +29,10 @@ public final class AutoRank extends JavaPlugin {
     private FileConfig config;
     private FileConfig messagesConfig;
     private DataManager dataManager;
+    private AutoRankCmd autoRankCmd;
+    private CheckPlaytimeCmd checkPlaytimeCmd;
+    private InventoryListener invListener;
+    private PlayerListener pListener;
 
     @Override
     public void onEnable() {
@@ -32,6 +41,9 @@ public final class AutoRank extends JavaPlugin {
             this.getLogger().severe("Failed to create plugin directory! The plugin will now be disabled!");
             this.setEnabled(false);
         }
+
+        // Set static instance of the plugin
+        instance = this;
 
         // Create configurations
         this.config = new FileConfig(this, "config.yml");
@@ -43,19 +55,36 @@ public final class AutoRank extends JavaPlugin {
 
         this.dataManager = new DataManager(this);
 
-        // Set static instance of the plugin
-        instance = this;
+        // Register commands
+        this.checkPlaytimeCmd = new CheckPlaytimeCmd(this);
+        Objects.requireNonNull(getCommand("playtime")).setExecutor(checkPlaytimeCmd);
+
+        this.autoRankCmd = new AutoRankCmd(this);
+        Objects.requireNonNull(getCommand("autorank")).setExecutor(autoRankCmd);
+
+        this.invListener = new InventoryListener(this);
+        this.pListener = new PlayerListener(this);
+
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        dataManager.shutdown();
+
+        this.invListener = null;
+        this.pListener = null;
+
         HandlerList.unregisterAll(instance);
 
         // Just to be safe, set the instance to null
         instance = null;
 
         HandlerList.unregisterAll(this);
+
+        // Shutdown everything
+        this.checkPlaytimeCmd = null;
+        this.autoRankCmd = null;
     }
 
     /**

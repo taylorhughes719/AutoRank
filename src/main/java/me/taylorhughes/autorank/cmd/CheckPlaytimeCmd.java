@@ -22,6 +22,7 @@ public class CheckPlaytimeCmd extends RCommand {
                 String[] s = AutoRank.getTimePlayedStr(sender).split(":");
                 String s1 = s[0] + " hours " + s[1] + " minutes";
                 sender.sendMessage(getPlugin().getMessage("Commands.Check-Playtime").replaceAll("%time%", s1));
+                return true;
             }
         } else if (args.length == 1) {
             if (sender.hasPermission("autorank.check.others")) {
@@ -29,6 +30,7 @@ public class CheckPlaytimeCmd extends RCommand {
                 String[] s = AutoRank.getTimePlayedStr(p).split(":");
                 String s1 = s[0] + " hours " + s[1] + " minutes";
                 sender.sendMessage(getPlugin().getMessage("Commands.Check-Playtime-Other").replaceAll("%player%", p.getDisplayName()).replaceAll("%time%", s1));
+                return true;
             }
         }
         return false;
@@ -36,6 +38,16 @@ public class CheckPlaytimeCmd extends RCommand {
 
     @Override
     public boolean onConsoleCommand(ConsoleCommandSender sender, Command command, String label, String[] args) {
+        if (args.length == 0) {
+            sender.sendMessage("This command cannot be completed by the console!");
+            return false;
+        } else if (args.length == 1) {
+            Player p = Players.getPlayer(args[0]);
+            String[] s = AutoRank.getTimePlayedStr(p).split(":");
+            String s1 = s[0] + " hours " + s[1] + " minutes";
+            sender.sendMessage(p.getName() + "has played: " + s1);
+            return true;
+        }
         return false;
     }
 }

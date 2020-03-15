@@ -3,10 +3,14 @@ package me.taylorhughes.autorank.event;
 import me.taylorhughes.autorank.AutoRank;
 import me.taylorhughes.autorank.util.Title;
 import org.bukkit.Bukkit;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.Objects;
 
 /**
  * @author Taylor Hughes
@@ -25,7 +29,12 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                plugin.getDataManager().loadPlayerData(e.getPlayer().getUniqueId());
+            }
+        }.runTaskLaterAsynchronously(plugin, 20L);
     }
 
     @EventHandler
@@ -43,6 +52,9 @@ public class PlayerListener implements Listener {
         }
         if (plugin.getMainConfig().getBoolean("On-Rankup.Broadcast.Enabled")) {
             Bukkit.broadcast(plugin.getMainConfig().getString("On-Rankup.Broadcast.Message"), "essentials.help");
+        }
+        for (String s : Objects.requireNonNull(plugin.getMainConfig().getConfig().getConfigurationSection("")).getKeys(false)) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), s);
         }
     }
 }

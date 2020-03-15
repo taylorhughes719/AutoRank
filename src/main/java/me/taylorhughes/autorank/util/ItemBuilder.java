@@ -19,6 +19,10 @@ public class ItemBuilder {
     private ItemMeta meta;
     private List<String> lore;
 
+    public ItemBuilder(Material material) {
+        this(material, 1);
+    }
+
     public ItemBuilder(Material material, int amount) {
         this(material, null, amount);
     }
@@ -138,6 +142,17 @@ public class ItemBuilder {
 
     public ItemBuilder setUnbreakable(boolean unbreakable) {
         this.meta.setUnbreakable(unbreakable);
+        return this;
+    }
+
+    public ItemBuilder setGlowing(boolean glowing) {
+        if (glowing) {
+            this.meta.addEnchant(Enchantment.DURABILITY, 1, true);
+            this.meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        } else if (this.meta.hasEnchants() && this.meta.hasEnchant(Enchantment.DURABILITY)) {
+            this.meta.removeEnchant(Enchantment.DURABILITY);
+            this.meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
         return this;
     }
 
